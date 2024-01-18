@@ -87,12 +87,27 @@
         background-color: #cbd5e0; /* Track color */
         border-radius: 6px;
         }
+        .ani{
+            transition: all 2s ease-in-out;
+            animation: fadeMe 1000ms ease-in-out 0ms infinite;
+        }
+
+        @keyframes fadeMe {
+  0%,100% {
+    scale: 1;
+    background-color: blue;
+  }
+  50% {
+    scale: 1.1;
+    background-color: red;
+  }
+}
     </style>
     
 </head>
 
 
-<body style="background-color: #dfdfdf">
+<body style="background-image: url('../images/blob-scene-haikei.svg'); background-size: cover;": #dfdfdf">
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
 
@@ -170,7 +185,7 @@
                             <form action="#" method="post" id="updtstatus">
                                 <input style="display:none;" id="fir_data" name="fir_data">
                                 <input style="display:none;" id="ipc_sec" name="ipc_sec">
-                                <button type="submit" style="display:none;" name="updtdb" id="updtdb" style="margin-bottom: 20px;" class="btn btn-primary">Update to DataBase</button>
+                                <button type="submit" style="display:none;" name="updtdb" id="updtdb" style="margin-bottom: 20px;" class="btn btn-primary ani">Update to DataBase</button>
                             </form>
                             
                             <button style="margin-bottom: 20px;" class="btn btn-primary" onclick="showDescription2(this)">Update Manually</button>
