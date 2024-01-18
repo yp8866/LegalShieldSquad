@@ -71,18 +71,46 @@ function closePopup2() {
 async function generateData(button) {
     const row1 = button.nextElementSibling;
     const description = row1.textContent;
+    
     button.innerText = "Generating..";
 
     try {
-        const firdata = await generateFIR(description);
-        const ipcsec = await generateIPC(firdata);
 
-        document.getElementById('fir_data').value = firdata;
-        document.getElementById('ipc_sec').value = ipcsec;
 
-        button.innerText = "Generate FIR & IPC Sections";
-        alert("Success!");
-        document.getElementById('updtdb').style.display = "block";
+        fetch('http://localhost:5000/predict_section_and_punishment', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ userInput: description }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                // displayResults(userInput, data.result1, data.result2);
+                let ipcsec=data.result1;
+                let ipcsec2 =data.result2;
+                let firdata=description;
+
+                console.log(ipcsec,"=====",data.result2);
+                
+                document.getElementById('fir_data').value = firdata;
+                document.getElementById('ipc_sec').value = ipcsec;
+
+                button.innerText = "Generate FIR & IPC Sections";
+                alert("Success!");
+                document.getElementById('updtdb').style.display = "block";
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+            // console.log(ipcsec,"=====",ipcsec2);
+
+
+
+        // const firdata = await generateFIR(description);
+        // const ipcsec = await generateIPC(firdata);
+
+        
     } catch (error) {
         console.error("Error:", error);
         button.innerText = "Generate FIR & IPC Sections";
