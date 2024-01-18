@@ -15,7 +15,7 @@ CORS(app)
 nlp = spacy.load("en_core_web_sm")
 
 # Load existing data
-existing_data = pd.read_csv('./ipc_sections.csv')
+existing_data = pd.read_csv('ipc_sections.csv')
 
 # Function to extract entities
 def extract_entities(text):
